@@ -48,3 +48,4 @@ The `Tester` class provides a detailed demonstration of the dishwasher's functio
 - The project adheres to object-oriented principles, including encapsulation and abstraction.
 - The `Dishwasher` class ensures safe operations through logical checks, enhancing reliability.
 
+<img width="1177" height="427" alt="image" src="https://github.com/user-attachments/assets/6f35eceb-0101-4dfc-bfff-9cd598fc5bbc" />
