@@ -1,8 +1,9 @@
+import java.util.Objects;
+
 /**
  * The Dishwasher class represents a dishwasher appliance with various functionalities 
  * such as adding dishes, turning it on/off, and opening/closing the door. It also 
- * maintains the state of the dishwasher, including its model, capacity, water temperature, 
- * and whether it is open or turned on.
+ * maintains the state of the dishwasher, including its model and whether it is open or turned on.
  * 
  * <p>This class provides methods to interact with the dishwasher and ensures that 
  * operations are performed under valid conditions (e.g., the dishwasher cannot be 
@@ -14,43 +15,36 @@
 public class Dishwasher {
     // Instance variables to represent the state of the dishwasher
     private boolean isOpen; // Indicates whether the dishwasher door is open
-    private double waterTemperature; // Current water temperature in the dishwasher
-    private String model; // Model name of the dishwasher
+    private Model model; // Model object representing the dishwasher's model
     private int numberOfDishes; // Current number of dishes in the dishwasher
-    private int capacity; // Maximum capacity of the dishwasher
     private boolean isOn; // Indicates whether the dishwasher is turned on
 
     /**
-     * Constructor to initialize the dishwasher with a model and capacity.
+     * Constructor to initialize the dishwasher with a model.
      * The dishwasher starts with default values for other attributes.
      * 
-     * @param _model The model name of the dishwasher.
-     * @param _capacity The maximum capacity of the dishwasher.
+     * @param model The model object representing the dishwasher's model.
      */
-    public Dishwasher(String _model, int _capacity) {
-        model = _model;
-        capacity = _capacity;
+    public Dishwasher(Model model) {
+        this.model = Objects.requireNonNull(model, "Model cannot be null");
         isOpen = false;
         isOn = false;
-        waterTemperature = 25.0; // Default water temperature
         numberOfDishes = 0; // Initially, no dishes are loaded
     }
 
     /**
-     * Overloaded constructor to initialize the dishwasher with a model, capacity, 
+     * Overloaded constructor to initialize the dishwasher with a model 
      * and a specific water temperature.
      * 
-     * @param _model The model name of the dishwasher.
-     * @param _capacity The maximum capacity of the dishwasher.
+     * @param model The model object representing the dishwasher's model.
      * @param _waterTemperature The initial water temperature of the dishwasher.
      */
-    public Dishwasher(String _model, int _capacity, double _waterTemperature) {
-        model = _model;
-        capacity = _capacity;
+    public Dishwasher(Model model, double _waterTemperature) {
+        this.model = Objects.requireNonNull(model, "Model cannot be null");
         isOpen = false;
         isOn = false;
-        waterTemperature = _waterTemperature;
         numberOfDishes = 0;
+        this.model.setWaterTemp(_waterTemperature); // Set the water temperature in the model
     }
 
     /**
@@ -60,7 +54,7 @@ public class Dishwasher {
      */
     public void addDishes(int _dishes) {
         if (isOpen) { // Check if the door is open
-            if (numberOfDishes + _dishes <= capacity) { // Check if capacity allows adding dishes
+            if (numberOfDishes + _dishes <= model.getCapacity()) { // Check if capacity allows adding dishes
                 numberOfDishes += _dishes;
                 System.out.println(_dishes + " dishes added. Total dishes: " + numberOfDishes);
             } else {
@@ -126,9 +120,9 @@ public class Dishwasher {
     @Override
     public String toString() {
         return "Dishwasher Model: " + model +
-               "\nCapacity: " + capacity +
+               "\nCapacity: " + model.getCapacity() +
                "\nNumber of Dishes: " + numberOfDishes +
-               "\nWater Temperature: " + waterTemperature + "°C" +
+               "\nWater Temperature: " + model.getWaterTemp() + "°C" +
                "\nIs Open: " + (isOpen ? "Yes" : "No") +
                "\nIs On: " + (isOn ? "Yes" : "No");
     }

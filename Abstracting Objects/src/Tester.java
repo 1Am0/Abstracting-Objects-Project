@@ -5,10 +5,12 @@ public class Tester {
         // Create instances of the Dishwasher class and test its functionality
 
         // Create a dishwasher with default water temperature
-        Dishwasher dishwasher1 = new Dishwasher("Model A", 12);
+        Model modelA = new Model("Model A", 12, 50.0);
+        Dishwasher dishwasher1 = new Dishwasher(modelA, 12);
 
         // Create a dishwasher with a specific water temperature
-        Dishwasher dishwasher2 = new Dishwasher("Model B", 8, 45.0);
+        Model modelB = new Model("Model B", 8, 45.0);
+        Dishwasher dishwasher2 = new Dishwasher(modelB, 8);
 
         // Test the functionality of dishwasher1
         System.out.println("Testing dishwasher1:");
