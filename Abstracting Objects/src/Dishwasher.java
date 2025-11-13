@@ -1,0 +1,135 @@
+/**
+ * The Dishwasher class represents a dishwasher appliance with various functionalities 
+ * such as adding dishes, turning it on/off, and opening/closing the door. It also 
+ * maintains the state of the dishwasher, including its model, capacity, water temperature, 
+ * and whether it is open or turned on.
+ * 
+ * <p>This class provides methods to interact with the dishwasher and ensures that 
+ * operations are performed under valid conditions (e.g., the dishwasher cannot be 
+ * turned on while the door is open).</p>
+ * 
+ * <p>Author: Anthony Mokhov</p>
+ * <p>Collaborator: GitHub Copilot</p>
+ */
+public class Dishwasher {
+    // Instance variables to represent the state of the dishwasher
+    private boolean isOpen; // Indicates whether the dishwasher door is open
+    private double waterTemperature; // Current water temperature in the dishwasher
+    private String model; // Model name of the dishwasher
+    private int numberOfDishes; // Current number of dishes in the dishwasher
+    private int capacity; // Maximum capacity of the dishwasher
+    private boolean isOn; // Indicates whether the dishwasher is turned on
+
+    /**
+     * Constructor to initialize the dishwasher with a model and capacity.
+     * The dishwasher starts with default values for other attributes.
+     * 
+     * @param _model The model name of the dishwasher.
+     * @param _capacity The maximum capacity of the dishwasher.
+     */
+    public Dishwasher(String _model, int _capacity) {
+        model = _model;
+        capacity = _capacity;
+        isOpen = false;
+        isOn = false;
+        waterTemperature = 25.0; // Default water temperature
+        numberOfDishes = 0; // Initially, no dishes are loaded
+    }
+
+    /**
+     * Overloaded constructor to initialize the dishwasher with a model, capacity, 
+     * and a specific water temperature.
+     * 
+     * @param _model The model name of the dishwasher.
+     * @param _capacity The maximum capacity of the dishwasher.
+     * @param _waterTemperature The initial water temperature of the dishwasher.
+     */
+    public Dishwasher(String _model, int _capacity, double _waterTemperature) {
+        model = _model;
+        capacity = _capacity;
+        isOpen = false;
+        isOn = false;
+        waterTemperature = _waterTemperature;
+        numberOfDishes = 0;
+    }
+
+    /**
+     * Adds dishes to the dishwasher if the door is open and there is enough capacity.
+     * 
+     * @param _dishes The number of dishes to add.
+     */
+    public void addDishes(int _dishes) {
+        if (isOpen) { // Check if the door is open
+            if (numberOfDishes + _dishes <= capacity) { // Check if capacity allows adding dishes
+                numberOfDishes += _dishes;
+                System.out.println(_dishes + " dishes added. Total dishes: " + numberOfDishes);
+            } else {
+                System.out.println("Cannot add dishes. Capacity exceeded.");
+            }
+        } else {
+            System.out.println("Cannot add dishes. Dishwasher is closed.");
+        }
+    }
+
+    /**
+     * Turns on the dishwasher if it is not already on and the door is closed.
+     */
+    public void turnOn() {
+        if (isOn) { // Check if the dishwasher is already on
+            System.out.println("Dishwasher is already ON.");
+        } else if (isOpen) { // Check if the door is open
+            System.out.println("Cannot turn on. Dishwasher is open.");
+        } else {
+            isOn = true;
+            System.out.println("Dishwasher is now ON.");
+        }
+    }
+
+    /**
+     * Turns off the dishwasher if it is currently on.
+     */
+    public void turnOff() {
+        if (!isOn) { // Check if the dishwasher is already off
+            System.out.println("Dishwasher is already OFF.");
+        } else {
+            isOn = false;
+            System.out.println("Dishwasher is now OFF.");
+        }
+    }
+
+    /**
+     * Opens the dishwasher door if it is not currently on.
+     */
+    public void openDoor() {
+        if (isOn) { // Check if the dishwasher is on
+            System.out.println("Cannot open door. Dishwasher is ON.");
+        } else {
+            isOpen = true;
+            System.out.println("Dishwasher door is now OPEN.");
+        }
+    }
+
+    /**
+     * Closes the dishwasher door.
+     */
+    public void closeDoor() {
+        isOpen = false;
+        System.out.println("Dishwasher door is now CLOSED.");
+    }
+
+    /**
+     * Returns a string representation of the dishwasher's current state.
+     * 
+     * @return A string describing the dishwasher's model, capacity, number of dishes, 
+     *         water temperature, and whether it is open or on.
+     */
+    @Override
+    public String toString() {
+        return "Dishwasher Model: " + model +
+               "\nCapacity: " + capacity +
+               "\nNumber of Dishes: " + numberOfDishes +
+               "\nWater Temperature: " + waterTemperature + "°C" +
+               "\nIs Open: " + (isOpen ? "Yes" : "No") +
+               "\nIs On: " + (isOn ? "Yes" : "No");
+    }
+}
