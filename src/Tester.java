@@ -1,3 +1,16 @@
+
+/**
+ * Tester class to demonstrate the functionality of the Dishwasher class.
+ * This class creates instances of the Dishwasher class with different models
+ * and tests their behavior by performing various operations such as adding dishes,
+ * opening/closing the door, and turning the dishwasher on/off.
+ * 
+ * Creator: Anthony Mokhov
+ * Collaborator: GitHub Copilot
+ * 
+ * @author Anthony Mokhov
+ * @version 1.0
+ */
 public class Tester {
     public static void main(String[] args) throws Exception {
         System.out.println("Hello, World!");
